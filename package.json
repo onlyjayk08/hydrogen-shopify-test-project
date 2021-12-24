@@ -4,6 +4,7 @@
   "version": "0.8.0",
   "license": "MIT",
   "private": true,
+  "proxy": "https://wds16-hydrogen-app.herokuapp.com:3000/",
   "scripts": {
     "dev": "vite",
     "lint": "npm-run-all lint:*",
