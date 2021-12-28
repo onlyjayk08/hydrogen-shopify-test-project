@@ -7,5 +7,5 @@ export default function ProductList({ products }){
                 <ProductCard key={product.id} product={product}/>
             ))}
         </div>
-    );
+    );  
 }

@@ -16,7 +16,6 @@ import {
   import gql from 'graphql-tag';
   // Import the `LoadMore` component that you created.
   import LoadMore from '../components/LoadMore.client';
-  
 
   // Fetch product data from your storefront by passing in a GraphQL query to the
   // `useShopQuery` server component.
@@ -66,7 +65,7 @@ import {
             ...ProductProviderFragment
           }
         }
-      }
+      }, 
     }
     ${ProductProviderFragment}
     `
