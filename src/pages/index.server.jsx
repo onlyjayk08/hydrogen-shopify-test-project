@@ -1,72 +1,139 @@
 import {
-    // The `useShopQuery` hook makes server-only GraphQL queries to the Storefront API.
-    useShopQuery,
-    // The `ProductProviderFragment` queries for all the product data you need for a component.
-    ProductProviderFragment,
-    // The `flattenConnection` utility takes Shopify storefront relay data
-    // and transforms it into a flat array of objects.
-    flattenConnection
+  useShopQuery,
+  ProductProviderFragment,
+  flattenConnection,
+  Image,
+  Link,
 } from '@shopify/hydrogen';
-  
-  // Import the `Layout` component that defines the structure of the page.
-  import Layout from '../components/Layout.server';
-  // Import the `ProductList` component that defines the products to display.
-  import ProductList from '../components/ProductList';
-  // Import `gql` to parse GraphQL queries.
-  import gql from 'graphql-tag';
-  // Import the `LoadMore` component that you created.
-  import LoadMore from '../components/LoadMore.client';
 
-  // Fetch product data from your storefront by passing in a GraphQL query to the
-  // `useShopQuery` server component.
-  export default function Index({ first = 3 }) {
-    const {data} = useShopQuery({
-      query: QUERY,
-      variables: {
-        numProductMetafields: 0,
-        includeReferenceMetafieldDetails: false,
-        numProductVariants: 250,
-        numProductMedia: 10,
-        numProductVariantMetafields: 10,
-        numProductVariantSellingPlanAllocations: 10,
-        numProductSellingPlanGroups: 10,
-        numProductSellingPlans: 10,
-        first,
-      },
-    });
+import {useParams, useHistory} from 'react-router-dom';
+
+import Layout from '../components/Layout.server';
+import FeaturedCollection from '../components/FeaturedCollection';
+import gql from 'graphql-tag';
+
+// Fetch product data from your storefront by passing in a GraphQL query to the
+// `useShopQuery` server component.
+export default function Index() {
+  const {data} = useShopQuery({
+    query: QUERY,
+    variables: {
+    },
+  });
+  const collections = data ? flattenConnection(data.collections) : [];
+  const featuredCollection = collections[2];
+
+  const articles = data ? flattenConnection(data.articles) : [];
+  const article = articles[0]
+  const pages = data ? flattenConnection(data.pages) : [];
+  const page = pages[0];
+  console.log(article);
+  console.log(page);
   
-    const products = flattenConnection(data.products);
-    // Return the first three products and the load more button.
-    return (
-      <Layout>
-        <LoadMore current={first}>
-          <ProductList products={products} />
-        </LoadMore>
-      </Layout>
-    );
+  const history = useHistory();
+  
+  const toarticle = () =>{
+    
+    console("to article onclick")
+    
+    history.push({
+      pathname: `/articles/${article.handle}`,
+      state: {
+        blog_handle: article.blog.handle,
+      }
+      });
   }
   
-  // Define the GraphQL query.
-  const QUERY = gql`
-    query HomeQuery(
-      $numProductMetafields: Int!
-      $includeReferenceMetafieldDetails: Boolean = false
-      $numProductVariants: Int!
-      $numProductMedia: Int!
-      $numProductVariantMetafields: Int!
-      $numProductVariantSellingPlanAllocations: Int!
-      $numProductSellingPlanGroups: Int!
-      $numProductSellingPlans: Int!
-      $first: Int!
-    ) {
-      products(first: $first) {
-        edges {
-          node {
-            ...ProductProviderFragment
+  // Return the first three products and the load more button.
+  return (
+    <Layout>
+      <FeaturedCollection collection = {featuredCollection}/>
+      <Link
+        to={`/pages/${page.handle}`}
+        className="text-blue-600 hover:underline"
+      >
+        Page
+      </Link>
+      <br/>
+      {/* <button
+        onClick={toarticle}
+        className="text-blue-600 hover:underline"
+      >
+        Blog Article
+      </button> */}
+      <Link
+        to={{
+          pathname: `/articles/${article.handle}?blog_handle=${article.blog.handle}`,
+          state: {
+            blogs_handle: `${article.blog.handle}`
+          }
+        }}
+        className="text-blue-600 hover:underline"
+      >
+        Blog Article
+      </Link>
+
+
+    </Layout>
+  );
+}
+
+// Define the GraphQL query.
+const QUERY = gql`
+  query HomeQuery(
+    $numCollections: Int = 20
+    $numProducts: Int = 4
+    $includeReferenceMetafieldDetails: Boolean = false
+    $numProductMetafields: Int = 0
+    $numProductVariants: Int = 250
+    $numProductMedia: Int = 1
+    $numProductVariantMetafields: Int = 10
+    $numProductVariantSellingPlanAllocations: Int = 0
+    $numProductSellingPlanGroups: Int = 0
+    $numProductSellingPlans: Int = 0 
+  ) {
+    collections(first: $numCollections){
+      edges{
+        node{
+          descriptionHtml
+          description
+          handle
+          id
+          title
+          image {
+            ...ImageFragment
+          }
+          products(first: $numProducts) {
+            edges {
+              node {
+                ...ProductProviderFragment
+              }
+            }
           }
         }
-      }, 
-    }
-    ${ProductProviderFragment}
-    `
-  
+      }
+    },
+    articles(first: 2){
+      edges{
+        node{
+          handle
+          title
+          id
+          blog{
+            handle
+          }
+        }
+      }
+    },
+    pages(first:2){
+      edges{
+        node{
+          handle
+          title
+        }
+      }
+    },
+  }
+  ${ProductProviderFragment}
+  ${Image.Fragment}
+  `

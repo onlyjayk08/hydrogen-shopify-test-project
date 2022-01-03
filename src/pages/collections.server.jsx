@@ -29,19 +29,19 @@ export default function collections(){
 
 const QUERY = gql`
 {
-    collections(first: 20) {
-      edges {
-        node {
-          description
-          handle
-          id
-          title
-          image {
-            ...ImageFragment
-          }
+  collections(first: 20) {
+    edges {
+      node {
+        description
+        handle
+        id
+        title
+        image {
+          ...ImageFragment
         }
       }
     }
+  }
 }
 ${Image.Fragment}
 `;
