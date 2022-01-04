@@ -10,6 +10,7 @@ import {useParams, useHistory} from 'react-router-dom';
 
 import Layout from '../components/Layout.server';
 import FeaturedCollection from '../components/FeaturedCollection';
+import FourCollections from '../components/FourCollections';
 import gql from 'graphql-tag';
 
 // Fetch product data from your storefront by passing in a GraphQL query to the
@@ -29,20 +30,6 @@ export default function Index() {
   const page = pages[0];
   console.log(article);
   console.log(page);
-  
-  const history = useHistory();
-  
-  const toarticle = () =>{
-    
-    console("to article onclick")
-    
-    history.push({
-      pathname: `/articles/${article.handle}`,
-      state: {
-        blog_handle: article.blog.handle,
-      }
-      });
-  }
   
   // Return the first three products and the load more button.
   return (
@@ -72,6 +59,8 @@ export default function Index() {
       >
         Blog Article
       </Link>
+
+      <FourCollections collections = {collections}/>
 
 
     </Layout>

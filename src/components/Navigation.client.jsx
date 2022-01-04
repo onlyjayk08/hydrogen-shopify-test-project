@@ -5,19 +5,18 @@ export default function Navigation({collections}) {
     <nav className="hidden lg:block text-center">
       <ul className="md:flex items-center justify-center">
         <li>
-            <Link
-             to={"/"}
-             className="block p-4 hover:opacity-80">
-                 Home
-             </Link>
-
+          <Link
+            to={"/"}
+            className="block p-4 hover:opacity-80">
+              Home
+          </Link>
         </li>
         <li>
-            <Link
-             to={"/collections"}
-             className="block p-4 hover:opacity-80">
-                 Collections
-             </Link>
+          <Link
+            to={"/collections"}
+            className="block p-4 hover:opacity-80">
+              Collections
+          </Link>
 
         </li>
 
