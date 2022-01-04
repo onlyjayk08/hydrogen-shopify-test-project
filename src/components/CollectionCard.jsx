@@ -3,7 +3,7 @@ import {
     Link
 } from '@shopify/hydrogen';
 
-import placeholderImage from '../assets/placeholder-image.png';
+// import placeholderImage from '../assets/placeholder-image.png';
 
 export default function CollectionCard({collection}){
 
@@ -12,7 +12,7 @@ export default function CollectionCard({collection}){
             <Link to={`/collections/${collection.handle}`}>
                 {collection.image ? (
                 <Image width="465" height="465" image={collection.image} />
-                ) : (<img src={placeholderImage} alt="placeholder" width={465} height={465}/>)}
+                ) : (<img src="/assets/placeholder-image.png" alt="placeholder" width={465} height={465}/>)}
                 <strong>{collection.title}</strong>
             </Link>
         </div>
