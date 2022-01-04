@@ -3,7 +3,7 @@ import {
     Link
 } from '@shopify/hydrogen';
 
-import placeholderImage from '../images/placeholder-image.png';
+import placeholderImage from '../assets/placeholder-image.png';
 
 export default function CollectionCard({collection}){
 
