@@ -49,12 +49,10 @@ export default function Index() {
         Blog Article
       </button> */}
       <Link
-        to={{
-          pathname: `/articles/${article.handle}?blog_handle=${article.blog.handle}`,
-          state: {
+        to={`/articles/${article.handle}?blog_handle=${article.blog.handle}`}
+          state= {{
             blogs_handle: `${article.blog.handle}`
-          }
-        }}
+          }}
         className="text-blue-600 hover:underline"
       >
         Blog Article

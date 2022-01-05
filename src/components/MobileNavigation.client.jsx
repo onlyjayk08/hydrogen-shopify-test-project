@@ -39,6 +39,15 @@ export default function MobileNavigation({collections, isOpen, setIsOpen}) {
                     <ArrowRightIcon className="hidden group-hover:block" />
                   </Link>
               </li>
+              <li className="border-b border-gray-200" key="Blog">
+                <Link
+                  className="group py-5 text-gray-700 flex items-center justify-between"
+                  to={`/blogs`}
+                  onClick={() => setIsOpen(false)}>
+                    Blogs
+                    <ArrowRightIcon className="hidden group-hover:block" />
+                  </Link>
+              </li>
               {collections.map((collection) => (
                 <li className="border-b border-gray-200" key={collection.id}>
                   <Link

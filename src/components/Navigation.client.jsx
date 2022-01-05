@@ -17,7 +17,13 @@ export default function Navigation({collections}) {
             className="block p-4 hover:opacity-80">
               Collections
           </Link>
-
+        </li>
+        <li>
+          <Link
+            to={"/blogs"}
+            className="block p-4 hover:opacity-80">
+              Blogs
+          </Link>
         </li>
 
         {collections.map((collection) => (
