@@ -1,48 +1,86 @@
-// import { useState } from "react";
-// import { SliderData } from "./SliderData";
-// import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
+import React from 'react';
+import { Slide } from 'react-slideshow-image';
+import './ImageSlider.css';
 
-// export default function ImageSlider(slides) {
+const slideImages = [
+  '../../public/assets/image1.jpg',
+  '../../public/assets/image2.jpg',
+  '../../public/assets/image3.jpg',
+  '../../public/assets/image1.jpg'
+];
 
-//   // const [current, setCurrent] = useState(0);
-//   // const length = slides.length;
+const properties = {
+  duration: 5000,
+  transitionDuration: 500,
+  infinite: true,
+  indicators: true,
+  arrows: true
+}
 
-//   // // if(!Array.isArray(slides) || slides.length <= 0){
-//   // //   return null;
-//   // // }
+export default function ImageSlider(){
+    return (
+      <Slide {...properties}>
+        <div className="each-slide">
+          <div style={{'backgroundImage': `url(${slideImages[0]})`}}>
+            <span>Slide 1</span>
+          </div>
+        </div>
+        <div className="each-slide">
+          <div style={{'backgroundImage': `url(${slideImages[1]})`}}>
+            <span>Slide 2</span>
+          </div>
+        </div>
+        <div className="each-slide">
+          <div style={{'backgroundImage': `url(${slideImages[2]})`}}>
+            <span>Slide 3</span>
+          </div>
+        </div>
+        <div className="each-slide">
+          <div style={{'backgroundImage': `url(${slideImages[3]})`}}>
+            <span>Slide 4</span>
+          </div>
+        </div>
+      </Slide>
+    )
+}
 
-//   // const nextSlide = () => {
-//   //   setCurrent(current === length -1 ? 0 : current + 1);
-//   // }
 
-//   // const prevSlide =() =>{
-//   //   setCurrent(current === 0 ? length - 1 : current - 1);
-//   // }
 
-//   const settings = {
-//     dots: true,
-//     infinite: true,
-//     speed: 500,
-//     slidesToShow: 1,
-//     slidesToScroll: 1
-//   };
 
-//   return (
-//     // <section className="slider">
-//     //   <h2> Image Slider</h2>
-//     //   <FaArrowAltCircleLeft className="left-arrow" onClick={prevSlide}/>
-//     //   <FaArrowAltCircleRight className="right-arrow" onClick={nextSlide}/>
-//     //   {SliderData.map((slide, index)=>{
-//     //     return (
-//     //       <div className={index === current ? 'slide active' : 'slide'} key={index}>
-//     //         {index === current && (
-//     //           <img src={slide.image} alt='demo image' className = 'sliderImage'/>
-//     //         )} 
-            
-//     //       </div>
-//     //     );
-//     //   })}
-//     // </section>
+// import { Slide } from 'react-slideshow-image';
+// import 'react-slideshow-image/dist/style.css';
 
-//   );
+// const slideImages = [
+//   {
+//     url: '../../public/assets/image1.jpg',
+//     caption: 'Slide 1'
+//   },
+//   {
+//     url: '../../public/assets/image2.jpg',
+//     caption: 'Slide 2'
+//   },
+//   {
+//     url: '../../public/assets/image3.jpg',
+//     caption: 'Slide 3'
+//   },
+//   {
+//     url: '../../public/assets/image4.jpg',
+//     caption: 'Slide 4'
+//   },
+// ]
+
+// export default function ImageSlider(){
+//   return(
+//     <div className="slide-container">
+//         <Slide>
+//          {slideImages.map((slideImage, index)=> (
+//             <div className="each-slide" key={index}>
+//               <div style={{'backgroundImage': `url(${slideImage.url})`}}>
+//                 <span>{slideImage.caption}</span>
+//               </div>
+//             </div>
+//           ))} 
+//         </Slide>
+//       </div>
+//   )
 // }

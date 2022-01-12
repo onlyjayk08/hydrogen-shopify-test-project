@@ -12,6 +12,7 @@ import Layout from '../components/Layout.server';
 import FeaturedCollection from '../components/FeaturedCollection';
 import FourCollections from '../components/FourCollections';
 import gql from 'graphql-tag';
+import ImageSlider from '../components/ImageSlider';
 
 // Fetch product data from your storefront by passing in a GraphQL query to the
 // `useShopQuery` server component.
@@ -34,6 +35,7 @@ export default function Index() {
   // Return the first three products and the load more button.
   return (
     <Layout>
+      <ImageSlider/>
       <FeaturedCollection collection = {featuredCollection}/>
       <Link
         to={`/pages/${page.handle}`}
@@ -62,6 +64,7 @@ export default function Index() {
 
 
     </Layout>
+    
   );
 }
 
